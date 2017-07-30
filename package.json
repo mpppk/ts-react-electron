@@ -2,7 +2,7 @@
   "name": "ts-react-electron",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "dependencies": {
     "@types/react": "^15.6.0",
     "@types/react-dom": "^15.5.1",
@@ -16,7 +16,10 @@
     "webpack": "^3.4.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "tsc --watch",
+    "watch": "webpack --watch"
   },
   "keywords": [],
   "author": "mpppk",
