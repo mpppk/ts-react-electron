@@ -8,16 +8,20 @@
     "@types/react": "^15.6.0",
     "@types/react-dom": "^15.5.1",
     "@types/react-tap-event-plugin": "0.0.30",
+    "@types/winston": "^2.3.4",
     "material-ui": "^0.18.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.0.2",
     "awesome-typescript-loader": "^3.2.2",
     "electron-devtools-installer": "^2.2.0",
     "source-map-loader": "^0.2.1",
+    "tslint": "^5.5.0",
+    "tslint-react": "^3.2.0",
     "typescript": "^2.4.2",
     "webpack": "^3.4.1"
   },
@@ -25,7 +29,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "tsc --watch",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts'"
   },
   "keywords": [],
   "author": "mpppk",

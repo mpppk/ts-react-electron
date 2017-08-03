@@ -1,22 +1,21 @@
 import * as electron from 'electron';
-// const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import * as path from 'path';
 import * as url from 'url';
-
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import winston from 'winston';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: Electron.BrowserWindow;
 
-function createWindow () {
-    installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name: string) => console.log(`Added Extension:  ${name}`))
-        .catch((err: Error) => console.log('An error occurred: ', err));
+function createWindow() {
+  installExtension(REACT_DEVELOPER_TOOLS)
+      .then((name: string) => winston.debug(`Added Extension:  ${name}`))
+      .catch((err: Error) => winston.error('An error occurred: ', err));
 
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
