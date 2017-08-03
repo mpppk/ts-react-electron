@@ -2,7 +2,7 @@
   "name": "ts-react-electron",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/main.bundle.js",
   "dependencies": {
     "@types/material-ui": "^0.17.19",
     "@types/react": "^15.6.0",

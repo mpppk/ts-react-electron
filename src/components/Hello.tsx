@@ -10,6 +10,12 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import {Dialog} from "material-ui/Dialog";
+import * as fs from 'fs';
+
+fs.readdir('.', function(err, files){
+    if (err) throw err;
+    console.log(files);
+});
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -34,30 +40,7 @@ export class Hello extends React.Component<HelloProps, any> {
         console.log(e);
     };
 
-    // handleOpen = () => {
-    //     this.setState({open: true});
-    // };
-    //
-    // handleClose = () => {
-    //     this.setState({open: false});
-    // };
-
     render() {
-
-        // const actions = [
-        //     <FlatButton
-        //         label="Cancel"
-        //         primary={true}
-        //         onTouchTap={this.handleClose}
-        //     />,
-        //     <FlatButton
-        //         label="Submit"
-        //         primary={true}
-        //         keyboardFocused={true}
-        //         onTouchTap={this.handleClose}
-        //     />,
-        // ];
-
         const styles = {
             root: {
                 display: 'flex',
@@ -133,16 +116,6 @@ export class Hello extends React.Component<HelloProps, any> {
         return <div>
             <h1>Hello from {this.props.compiler} and {this.props.framework}</h1>
             <RaisedButton label="Default" />
-            {/*<RaisedButton label="Dialog" onTouchTap={this.handleOpen} />*/}
-            {/*<Dialog*/}
-                {/*title="Dialog With Actions"*/}
-                {/*actions={actions}*/}
-                {/*modal={false}*/}
-                {/*open={this.state.open}*/}
-                {/*onRequestClose={this.handleClose}*/}
-            {/*>*/}
-                {/*The actions in this window were passed in as an array of React objects.*/}
-            {/*</Dialog>*/}
             {sampleCard()}
             {GridListExampleSimple()}
         </div>;
