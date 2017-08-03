@@ -7,11 +7,17 @@ const BrowserWindow = electron.BrowserWindow;
 import * as path from 'path';
 import * as url from 'url';
 
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow () {
+    installExtension(REACT_DEVELOPER_TOOLS)
+        .then((name: string) => console.log(`Added Extension:  ${name}`))
+        .catch((err: Error) => console.log('An error occurred: ', err));
+
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 

@@ -14,7 +14,9 @@
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
+    "@types/electron-devtools-installer": "^2.0.2",
     "awesome-typescript-loader": "^3.2.2",
+    "electron-devtools-installer": "^2.2.0",
     "source-map-loader": "^0.2.1",
     "typescript": "^2.4.2",
     "webpack": "^3.4.1"
