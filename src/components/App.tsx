@@ -4,8 +4,10 @@ import * as React from 'react';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
-import {connect} from 'react-redux';
-import * as actionCreators from './actionCreators';
+import {connect, Dispatch} from 'react-redux';
+import {Action, ActionFunction0} from 'redux-actions';
+import {IRootState} from '../reducer';
+import {appActionCreator, AppActionCreator} from './actionCreators';
 
 fs.readdir('.', (err, files) => {
     if (err) {
@@ -18,8 +20,11 @@ fs.readdir('.', (err, files) => {
 injectTapEventPlugin();
 
 export interface IAppProps {
-    app?: any;
-    actions?: any;
+    app?: {count: number};
+    actions?: {
+        increment(): ActionFunction0<Action<void>>;
+        decrement(): ActionFunction0<Action<void>>;
+    };
 }
 
 class App extends React.Component<IAppProps, undefined> {
@@ -29,27 +34,27 @@ class App extends React.Component<IAppProps, undefined> {
     }
 
     public render() {
-        // const { app: { count }, actions: { dispatch1, dispatch2 } } = this.props;
-
-        const increment = (e: any) => this.props.actions.increment();
-        const decrement = (e: any) => this.props.actions.decrement();
+        const increment = (e: React.MouseEvent<{}>) => this.props.actions.increment();
+        const decrement = (e: React.MouseEvent<{}>) => this.props.actions.decrement();
 
         return (
             <div>
                 <h1>Count: {this.props.app.count}</h1>
                 <RaisedButton label='Increment' onClick={increment} />
-                <RaisedButton label='Decrement' onClick={decrement}/>
+                <RaisedButton label='Decrement' onClick={decrement} />
             </div>
         );
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: IRootState) {
     return  { app: state.app };
 }
 
-function mapDispatchToProps(dispatch: any) {
-    return { actions: bindActionCreators(actionCreators as any, dispatch) };
+function mapDispatchToProps
+<TDispatchProps extends {actions: AppActionCreator}, T>(dispatch: Dispatch<any>): TDispatchProps {
+    return { actions: bindActionCreators<AppActionCreator>(appActionCreator, dispatch) } as TDispatchProps;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App as any);
+export default
+connect<IRootState, {actions: AppActionCreator}, undefined>(mapStateToProps, mapDispatchToProps)(App as any);
