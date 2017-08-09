@@ -3,7 +3,7 @@ import * as electron from 'electron';
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import * as path from 'path';
 import * as url from 'url';
 import * as winston from 'winston';
@@ -17,7 +17,11 @@ function createWindow() {
       .then((name: string) => winston.debug(`Added Extension:  ${name}`))
       .catch((err: Error) => winston.warn('An error occurred: ', err));
 
-  // Create the browser window.
+  installExtension(REDUX_DEVTOOLS)
+      .then((name: string) => winston.debug(`Added Extension:  ${name}`))
+      .catch((err: Error) => winston.warn('An error occurred: ', err));
+
+    // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
