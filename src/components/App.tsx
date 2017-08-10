@@ -7,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect, Dispatch} from 'react-redux';
 import {Action, ActionFunction0} from 'redux-actions';
 import {IRootState} from '../reducer';
-import {appActionCreator, AppActionCreator} from './actionCreators';
+import {appActionCreator, AppActionCreator} from '../actionCreators';
 
 fs.readdir('.', (err, files) => {
     if (err) {
