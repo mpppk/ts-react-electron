@@ -2,9 +2,11 @@ import {ActionCreator} from 'react-redux';
 import {ActionCreatorsMapObject} from 'redux';
 import {Action, ActionFunction0, createAction} from 'redux-actions';
 
-export const INC = 'INC';
-export const DEC = 'DEC';
-export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
+enum ActionType {
+    INC = 'INC',
+    DEC = 'DEC',
+    TOGGLE_DRAWER = 'TOGGLE_DRAWER',
+}
 
 export class AppActionCreator implements ActionCreatorsMapObject {
     [key: string]: ActionCreator<any>;
@@ -17,7 +19,7 @@ export class AppActionCreator implements ActionCreatorsMapObject {
 }
 
 export const appActionCreator = new AppActionCreator(
-    createAction(INC),
-    createAction(DEC),
-    createAction(TOGGLE_DRAWER),
+    createAction(ActionType.INC),
+    createAction(ActionType.DEC),
+    createAction(ActionType.TOGGLE_DRAWER),
 );
