@@ -4,10 +4,10 @@ import {connect, Dispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Action, ActionFunction0} from 'redux-actions';
 import {appActionCreator, AppActionCreator} from '../actionCreators';
-import {IRootState} from '../reducer';
+import {ICounterState, IRootState} from '../reducer';
 
 export interface ICounterProps {
-    app?: {count: number};
+    count?: number;
     actions?: {
         increment(): ActionFunction0<Action<void>>;
         decrement(): ActionFunction0<Action<void>>;
@@ -24,7 +24,7 @@ class Counter extends React.Component<ICounterProps, undefined> {
     public render() {
         return (
             <div>
-                <h1>Count: {this.props.app.count}</h1>
+                <h1>Count: {this.props.count}</h1>
                 <RaisedButton label='Increment' onClick={this.incrementClickEvent} />
                 <RaisedButton label='Decrement' onClick={this.decrementClickEvent} />
             </div>
@@ -41,7 +41,7 @@ class Counter extends React.Component<ICounterProps, undefined> {
 }
 
 function mapStateToProps(state: IRootState) {
-    return  { app: state.app };
+    return  state.counter;
 }
 
 function mapDispatchToProps
@@ -50,4 +50,4 @@ function mapDispatchToProps
 }
 
 export default
-    connect<IRootState, {actions: AppActionCreator}, undefined>(mapStateToProps, mapDispatchToProps)(Counter as any);
+    connect<ICounterState, {actions: AppActionCreator}, undefined>(mapStateToProps, mapDispatchToProps)(Counter as any);

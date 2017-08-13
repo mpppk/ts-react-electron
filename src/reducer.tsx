@@ -2,20 +2,44 @@ import {combineReducers} from 'redux';
 import {Action} from 'redux-actions';
 
 export interface IRootState {
-    app: {count: number};
+    app: IAppState;
+    counter: ICounterState;
 }
 
-const appInitialState = { count : 0 };
+export interface IAppState {
+    isOpenDrawer: boolean;
+}
+
+export interface ICounterState {
+    count: number;
+}
+
+const appInitialState: IAppState = { isOpenDrawer: false};
+const counterInitialState: ICounterState = { count: 0 };
 
 export const app = (state = appInitialState, action: Action<undefined>) => {
+    const newState = Object.assign({}, state);
     switch (action.type) {
-        case 'INC':
-            return Object.assign({}, { count: state.count + 1 });
-        case 'DEC':
-            return Object.assign({}, { count: state.count - 1 });
+        case 'TOGGLE_DRAWER':
+            newState.isOpenDrawer = !newState.isOpenDrawer;
+            return newState;
         default:
             return state;
     }
 };
 
-export const reducer = combineReducers({app});
+export const counter = (state = counterInitialState, action: Action<undefined>) => {
+    const newState = Object.assign({}, state);
+    switch (action.type) {
+        case 'INC':
+            newState.count++;
+            return newState;
+        case 'DEC':
+            newState.count--;
+            return newState;
+        default:
+            return state;
+    }
+};
+
+export const reducer = combineReducers({app, counter});
