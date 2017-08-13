@@ -29,7 +29,7 @@ fs.readdir('.', (err, files) => {
 injectTapEventPlugin();
 
 export interface IAppProps {
-    isOpenDrawer: boolean;
+    isOpenDrawer?: boolean;
     actions?: {
         toggleDrawer(): ActionFunction0<Action<void>>;
     };
@@ -79,15 +79,21 @@ class App extends React.Component<IAppProps, undefined> {
     }
 
     private handleLeftIconButtonTouchTap() {
-        this.props.actions.toggleDrawer();
+        if (typeof(this.props.actions) !== 'undefined') {
+            this.props.actions.toggleDrawer();
+        }
     }
 
     private handleClose() {
-        this.props.actions.toggleDrawer();
+        if (typeof(this.props.actions) !== 'undefined') {
+            this.props.actions.toggleDrawer();
+        }
     }
 
     private handleRequestChange(_: boolean) {
-        this.props.actions.toggleDrawer();
+        if (typeof(this.props.actions) !== 'undefined') {
+            this.props.actions.toggleDrawer();
+        }
     }
 }
 
@@ -101,4 +107,4 @@ function mapDispatchToProps
 }
 
 export default
-connect<IAppState, {actions: AppActionCreator}, undefined>(mapStateToProps, mapDispatchToProps)(App as any);
+connect<IAppState, {actions: AppActionCreator}, IAppProps>(mapStateToProps, mapDispatchToProps)(App as any);

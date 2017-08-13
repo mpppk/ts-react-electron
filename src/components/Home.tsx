@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class Home extends React.Component<{}, undefined> {
+export class Home extends React.Component<{}, any> {
     constructor(props: {}) {
         super(props);
     }

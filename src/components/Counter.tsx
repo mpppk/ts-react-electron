@@ -32,11 +32,15 @@ class Counter extends React.Component<ICounterProps, undefined> {
     }
 
     private incrementClickEvent(e: React.MouseEvent<{}>) {
-        return this.props.actions.increment();
+        if (typeof(this.props.actions) !== 'undefined') {
+            return this.props.actions.increment();
+        }
     }
 
     private decrementClickEvent(e: React.MouseEvent<{}>) {
-        return this.props.actions.decrement();
+        if (typeof(this.props.actions) !== 'undefined') {
+            return this.props.actions.decrement();
+        }
     }
 }
 
@@ -49,5 +53,5 @@ function mapDispatchToProps
     return { actions: bindActionCreators<AppActionCreator>(appActionCreator, dispatch) };
 }
 
-export default
-    connect<ICounterState, {actions: AppActionCreator}, undefined>(mapStateToProps, mapDispatchToProps)(Counter as any);
+export default connect<ICounterState, {actions: AppActionCreator}, ICounterProps>
+(mapStateToProps, mapDispatchToProps)(Counter as any);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class About extends React.Component<{}, undefined> {
+export class About extends React.Component<{}, any> {
     private static getNodeVersion() {
         return process.versions.node;
     }
