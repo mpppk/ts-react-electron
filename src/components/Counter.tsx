@@ -14,7 +14,7 @@ export interface ICounterProps {
     };
 }
 
-class Counter extends React.Component<ICounterProps, undefined> {
+export class Counter extends React.Component<ICounterProps, undefined> {
     constructor(props: ICounterProps) {
         super(props);
         this.incrementClickEvent = this.incrementClickEvent.bind(this);
@@ -53,5 +53,6 @@ function mapDispatchToProps
     return { actions: bindActionCreators<AppActionCreator>(appActionCreator, dispatch) };
 }
 
-export default connect<ICounterState, {actions: AppActionCreator}, ICounterProps>
+// tslint:disable-next-line variable-name
+export const ConnectedCounter = connect<ICounterState, {actions: AppActionCreator}, ICounterProps>
 (mapStateToProps, mapDispatchToProps)(Counter as any);

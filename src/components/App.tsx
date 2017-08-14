@@ -15,7 +15,7 @@ import {Action, ActionFunction0} from 'redux-actions';
 import {AppActionCreator, appActionCreator} from '../actionCreators';
 import {IAppState, IRootState} from '../reducer';
 import {About} from './About';
-import Counter from './Counter';
+import {ConnectedCounter} from './Counter';
 import {Home} from './Home';
 
 fs.readdir('.', (err, files) => {
@@ -72,7 +72,7 @@ class App extends React.Component<IAppProps, undefined> {
 
                     <Route exact={true} path='/' component={Home}/>
                     <Route path='/about' component={About}/>
-                    <Route path='/counter' component={Counter}/>
+                    <Route path='/counter' component={ConnectedCounter}/>
                 </div>
             </Router>
         );
