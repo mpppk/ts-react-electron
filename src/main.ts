@@ -10,7 +10,7 @@ import * as winston from 'winston';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: Electron.BrowserWindow;
+let mainWindow: Electron.BrowserWindow | null;
 
 function createWindow() {
   installExtension(REACT_DEVELOPER_TOOLS)
