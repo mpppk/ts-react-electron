@@ -2,8 +2,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import * as React from 'react';
 import {connect, Dispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Action, ActionFunction0} from 'redux-actions';
-import {appActionCreator, AppActionCreator} from '../actionCreators';
+import {Action, ActionFunction0, ActionFunctionAny} from 'redux-actions';
+import {appActionCreator} from '../actionCreators';
 import {ICounterState, IRootState} from '../reducer';
 export interface ICounterProps {
     count?: number;
@@ -56,11 +56,15 @@ function mapStateToProps(state: IRootState) {
     return  state.counter;
 }
 
+interface IRootActionCreator {
+    [actionName: string]: ActionFunctionAny<Action<undefined>>;
+}
+
 function mapDispatchToProps
-<TDispatchProps extends {actions: AppActionCreator}, T>(dispatch: Dispatch<any>) {
-    return { actions: bindActionCreators<AppActionCreator>(appActionCreator, dispatch) };
+<TDispatchProps extends {actions: IRootActionCreator}, T>(dispatch: Dispatch<any>) {
+    return { actions: bindActionCreators<IRootActionCreator>(appActionCreator, dispatch) };
 }
 
 // tslint:disable-next-line variable-name
-export const ConnectedCounter = connect<ICounterState, {actions: AppActionCreator}, ICounterProps>
+export const ConnectedCounter = connect<ICounterState, {actions: IRootActionCreator}, ICounterProps>
 (mapStateToProps, mapDispatchToProps)(Counter as any);

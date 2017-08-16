@@ -1,28 +1,16 @@
-import {ActionCreator} from 'react-redux';
-import {ActionCreatorsMapObject} from 'redux';
-import {Action, ActionFunction0, createAction} from 'redux-actions';
+import {ActionMap, createActions} from 'redux-actions';
 
 export enum ActionType {
-    ASYNC_INC = 'ASYNC_INC',
-    INC = 'INC',
-    DEC = 'DEC',
-    TOGGLE_DRAWER = 'TOGGLE_DRAWER',
+    ASYNC_INCREMENT = 'ASYNC_INCREMENT',
+    INCREMENT       = 'INCREMENT',
+    DECREMENT       = 'DECREMENT',
+    TOGGLE_DRAWER   = 'TOGGLE_DRAWER',
 }
 
-export class AppActionCreator implements ActionCreatorsMapObject {
-    [key: string]: ActionCreator<any>;
+const actions: ActionMap<undefined, undefined> = {};
+actions[ActionType.ASYNC_INCREMENT] = undefined;
+actions[ActionType.INCREMENT]       = undefined;
+actions[ActionType.DECREMENT]       = undefined;
+actions[ActionType.TOGGLE_DRAWER]   = undefined;
 
-    constructor(
-        public asyncIncrement: ActionFunction0<Action<void>>,
-        public increment: ActionFunction0<Action<void>>,
-        public decrement: ActionFunction0<Action<void>>,
-        public toggleDrawer: ActionFunction0<Action<void>>,
-    ) {}
-}
-
-export const appActionCreator = new AppActionCreator(
-    createAction(ActionType.ASYNC_INC),
-    createAction(ActionType.INC),
-    createAction(ActionType.DEC),
-    createAction(ActionType.TOGGLE_DRAWER),
-);
+export const appActionCreator = createActions(actions);

@@ -32,10 +32,10 @@ export const app = (state = appInitialState, action: Action<undefined>) => {
 export const counter = (state = counterInitialState, action: Action<undefined>) => {
     const newState = Object.assign({}, state);
     switch (action.type) {
-        case ActionType.INC:
+        case ActionType.INCREMENT:
             newState.count++;
             return newState;
-        case ActionType.DEC:
+        case ActionType.DECREMENT:
             newState.count--;
             return newState;
         default:

@@ -11,8 +11,8 @@ import {
 } from 'react-router-dom';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
-import {Action, ActionFunction0} from 'redux-actions';
-import {AppActionCreator, appActionCreator} from '../actionCreators';
+import {Action, ActionFunction0, ActionFunctionAny} from 'redux-actions';
+import {appActionCreator} from '../actionCreators';
 import {IAppState, IRootState} from '../reducer';
 import {About} from './About';
 import {ConnectedCounter} from './Counter';
@@ -101,10 +101,14 @@ function mapStateToProps(state: IRootState) {
     return  state.app;
 }
 
+interface IRootActionCreator {
+    [actionName: string]: ActionFunctionAny<Action<undefined>>;
+}
+
 function mapDispatchToProps
-<TDispatchProps extends {actions: AppActionCreator}, T>(dispatch: Dispatch<any>) {
-    return { actions: bindActionCreators<AppActionCreator>(appActionCreator, dispatch) };
+<TDispatchProps extends {actions: IRootActionCreator}, T>(dispatch: Dispatch<any>) {
+    return { actions: bindActionCreators<IRootActionCreator>(appActionCreator, dispatch) };
 }
 
 export default
-connect<IAppState, {actions: AppActionCreator}, IAppProps>(mapStateToProps, mapDispatchToProps)(App as any);
+connect<IAppState, {actions: IRootActionCreator}, IAppProps>(mapStateToProps, mapDispatchToProps)(App as any);
