@@ -1,22 +1,20 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import {Action, createAction} from 'redux-actions';
+import {delay} from 'redux-saga';
+import {all, call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {ActionType} from './actionCreators';
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-// function* fetchUser(action: any) {
-//     try {
-//         const user = yield call(Api.fetchUser, action.payload.userId);
-//         yield put({type: 'USER_FETCH_SUCCEEDED', user});
-//     } catch (e) {
-//         yield put({type: 'USER_FETCH_FAILED', message: e.message});
-//     }
-// }
-
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
-function* mySaga(): any {
-    console.log('hello');
-    // yield takeEvery('USER_FETCH_REQUESTED', fetchUser);
+function* watchAsyncIncrement(): any {
+    yield delay(1000);
+    yield put(createAction(ActionType.INC)());
 }
 
-export default mySaga;
+export function* watchIncrementAsync() {
+    yield takeEvery(ActionType.ASYNC_INC, watchAsyncIncrement);
+}
+
+// single entry point to start all Sagas at once
+export default function* rootSaga() {
+    yield all([
+        watchIncrementAsync(),
+    ]);
+}

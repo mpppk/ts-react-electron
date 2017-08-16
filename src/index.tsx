@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import App from './components/App';
 import { reducer } from './reducer';
-import mySaga from './sagas';
+import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -16,7 +16,7 @@ const store = createStore(
     applyMiddleware(sagaMiddleware),
 );
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <MuiThemeProvider>

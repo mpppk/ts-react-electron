@@ -5,10 +5,10 @@ import {bindActionCreators} from 'redux';
 import {Action, ActionFunction0} from 'redux-actions';
 import {appActionCreator, AppActionCreator} from '../actionCreators';
 import {ICounterState, IRootState} from '../reducer';
-
 export interface ICounterProps {
     count?: number;
     actions?: {
+        asyncIncrement(): ActionFunction0<Action<void>>;
         increment(): ActionFunction0<Action<void>>;
         decrement(): ActionFunction0<Action<void>>;
     };
@@ -17,6 +17,7 @@ export interface ICounterProps {
 export class Counter extends React.Component<ICounterProps, undefined> {
     constructor(props: ICounterProps) {
         super(props);
+        this.asyncIncrementClickEvent = this.asyncIncrementClickEvent.bind(this);
         this.incrementClickEvent = this.incrementClickEvent.bind(this);
         this.decrementClickEvent = this.decrementClickEvent.bind(this);
     }
@@ -25,10 +26,17 @@ export class Counter extends React.Component<ICounterProps, undefined> {
         return (
             <div>
                 <h1>Count: {this.props.count}</h1>
+                <RaisedButton label='Async Increment' onClick={this.asyncIncrementClickEvent} />
                 <RaisedButton label='Increment' onClick={this.incrementClickEvent} />
                 <RaisedButton label='Decrement' onClick={this.decrementClickEvent} />
             </div>
         );
+    }
+
+    private asyncIncrementClickEvent(e: React.MouseEvent<{}>) {
+        if (typeof(this.props.actions) !== 'undefined') {
+            return this.props.actions.asyncIncrement();
+        }
     }
 
     private incrementClickEvent(e: React.MouseEvent<{}>) {

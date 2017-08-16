@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {Action} from 'redux-actions';
+import {ActionType} from './actionCreators';
 
 export interface IRootState {
     app: IAppState;
@@ -20,7 +21,7 @@ const counterInitialState: ICounterState = { count: 0 };
 export const app = (state = appInitialState, action: Action<undefined>) => {
     const newState = Object.assign({}, state);
     switch (action.type) {
-        case 'TOGGLE_DRAWER':
+        case ActionType.TOGGLE_DRAWER:
             newState.isOpenDrawer = !newState.isOpenDrawer;
             return newState;
         default:
@@ -31,10 +32,10 @@ export const app = (state = appInitialState, action: Action<undefined>) => {
 export const counter = (state = counterInitialState, action: Action<undefined>) => {
     const newState = Object.assign({}, state);
     switch (action.type) {
-        case 'INC':
+        case ActionType.INC:
             newState.count++;
             return newState;
-        case 'DEC':
+        case ActionType.DEC:
             newState.count--;
             return newState;
         default:
