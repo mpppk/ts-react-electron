@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {Action} from 'redux-actions';
-import {ActionType} from './actionCreators';
+import {Action, combineActions, handleActions} from 'redux-actions';
+import {ActionType, ICounterAmountPayload} from './actionCreators';
 
 export interface IRootState {
     app: IAppState;
@@ -29,18 +29,12 @@ export const app = (state = appInitialState, action: Action<undefined>) => {
     }
 };
 
-export const counter = (state = counterInitialState, action: Action<undefined>) => {
-    const newState = Object.assign({}, state);
-    switch (action.type) {
-        case ActionType.INCREMENT:
-            newState.count++;
-            return newState;
-        case ActionType.DECREMENT:
-            newState.count--;
-            return newState;
-        default:
-            return state;
-    }
-};
+const combinedActions = combineActions(ActionType.INCREMENT, ActionType.DECREMENT);
+export const counter = handleActions<ICounterState, Action<ICounterAmountPayload>>({
+    [combinedActions](state: ICounterState, action: Action<ICounterAmountPayload>) {
+        return (typeof action.payload === 'undefined') ? {...state} :
+            { ...state, count: state.count + action.payload.amount };
+    },
+}, counterInitialState);
 
 export const reducer = combineReducers({app, counter});

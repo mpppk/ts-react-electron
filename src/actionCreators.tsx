@@ -7,10 +7,15 @@ export enum ActionType {
     TOGGLE_DRAWER   = 'TOGGLE_DRAWER',
 }
 
-const actions: ActionMap<undefined, undefined> = {};
-actions[ActionType.ASYNC_INCREMENT] = undefined;
-actions[ActionType.INCREMENT]       = undefined;
-actions[ActionType.DECREMENT]       = undefined;
-actions[ActionType.TOGGLE_DRAWER]   = undefined;
+export interface ICounterAmountPayload {
+    amount: number;
+}
+
+const actions: ActionMap<ICounterAmountPayload | undefined, undefined> = {
+    [ActionType.ASYNC_INCREMENT]: undefined,
+    [ActionType.INCREMENT]      : (amount: number) => ({ amount: 1 }),
+    [ActionType.DECREMENT]      : (amount: number) => ({ amount: -1 }),
+    [ActionType.TOGGLE_DRAWER]  : undefined,
+};
 
 export const appActionCreator = createActions(actions);

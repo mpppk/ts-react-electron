@@ -1,11 +1,10 @@
-import {Action, createAction} from 'redux-actions';
 import {delay} from 'redux-saga';
-import {all, call, put, takeEvery, takeLatest} from 'redux-saga/effects';
-import {ActionType} from './actionCreators';
+import {all, put, takeEvery} from 'redux-saga/effects';
+import {ActionType, appActionCreator} from './actionCreators';
 
 function* watchAsyncIncrement(): any {
     yield delay(1000);
-    yield put(createAction(ActionType.INCREMENT)());
+    yield put(appActionCreator.increment());
 }
 
 export function* watchIncrementAsync() {
