@@ -107,8 +107,8 @@ interface IRootActionCreator {
 
 function mapDispatchToProps
 <TDispatchProps extends {actions: IRootActionCreator}, T>(dispatch: Dispatch<any>) {
-    return { actions: bindActionCreators<IRootActionCreator>(appActionCreator, dispatch) };
+    return { actions: bindActionCreators(appActionCreator, dispatch) };
 }
 
 export default
-connect<IAppState, {actions: IRootActionCreator}, IAppProps>(mapStateToProps, mapDispatchToProps)(App as any);
+connect(mapStateToProps, mapDispatchToProps)(App as any);

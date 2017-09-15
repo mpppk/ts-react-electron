@@ -60,11 +60,9 @@ interface IRootActionCreator {
     [actionName: string]: ActionFunctionAny<Action<undefined>>;
 }
 
-function mapDispatchToProps
-<TDispatchProps extends {actions: IRootActionCreator}, T>(dispatch: Dispatch<any>) {
-    return { actions: bindActionCreators<IRootActionCreator>(appActionCreator, dispatch) };
+function mapDispatchToProps(dispatch: Dispatch<any>) {
+    return { actions: bindActionCreators(appActionCreator, dispatch) };
 }
 
 // tslint:disable-next-line variable-name
-export const ConnectedCounter = connect<ICounterState, {actions: IRootActionCreator}, ICounterProps>
-(mapStateToProps, mapDispatchToProps)(Counter as any);
+export const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter as any);
