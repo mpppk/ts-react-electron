@@ -22,6 +22,6 @@ describe('<About />', () => {
 describe('<Counter />', () => {
     it('have two raised button', () => {
         const wrapper = shallow(<Counter/>);
-        expect(wrapper.find(RaisedButton)).toHaveLength(2);
+        expect(wrapper.find(RaisedButton)).toHaveLength(3);
     });
 });
