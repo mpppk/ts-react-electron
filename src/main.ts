@@ -21,6 +21,8 @@ function createWindow() {
       .then((name: string) => winston.debug(`Added Extension:  ${name}`))
       .catch((err: Error) => winston.warn('An error occurred: ', err));
 
+  require('electron-debug')(); // eslint-disable-line no-var-requires
+
     // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
