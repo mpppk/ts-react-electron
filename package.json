@@ -49,6 +49,9 @@
     "test": "jest",
     "start": "electron .",
     "build": "tsc --watch",
+    "build-libs": "webpack --config webpack.libs.config.js",
+    "watch-main": "webpack --watch --config webpack.main.config.js",
+    "watch-renderer": "webpack --watch --config webpack.renderer.config.js",
     "watch": "webpack --watch",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts'"
   },
