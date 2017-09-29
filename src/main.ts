@@ -27,11 +27,23 @@ function createWindow() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '..', 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
+  if (process.env.NODE_ENV === 'production') {
+      mainWindow.loadURL(url.format({
+          pathname: path.join(__dirname, '..', 'index.html'),
+          protocol: 'file:',
+          slashes: true,
+      }));
+  } else {
+    console.log('not prod');
+      mainWindow.loadURL('http://localhost:8080');
+  }
+
+  // and load the index.html of the app.
+  // mainWindow.loadURL(url.format({
+  //   pathname: path.join(__dirname, '..', 'index.html'),
+  //   protocol: 'file:',
+  //   slashes: true,
+  // }));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

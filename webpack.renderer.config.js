@@ -1,8 +1,13 @@
+const webpack = require('webpack');
+
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: [
+    "react-hot-loader/patch",
+    "./src/index.tsx"
+    ],
   output: {
     filename: "bundle.js",
-    path: __dirname + "/dist"
+    path: __dirname + "/dist",
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -16,7 +21,12 @@ module.exports = {
   module: {
     rules: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      { test: /\.tsx?$/,
+        loader: [
+          "react-hot-loader/webpack",
+          "awesome-typescript-loader"
+        ]
+      },
     ]
   },
   externals: [
@@ -26,5 +36,25 @@ module.exports = {
       'material-ui': 'MaterialUI',
     }
   ],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    // NODE_ENV should be production so that modules do not perform certain development checks
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
+  ],
+
+  devServer: {
+    hot: true,
+    historyApiFallback: true,
+  },
+
   target: "electron-renderer",
 };

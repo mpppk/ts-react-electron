@@ -5,9 +5,9 @@
   "main": "dist/main.bundle.js",
   "dependencies": {
     "@types/electron-debug": "^1.1.0",
-    "@types/material-ui": "^0.17.19",
     "@types/react": "^15.6.0",
     "@types/react-dom": "^15.5.1",
+    "@types/react-hot-loader": "^3.0.4",
     "@types/react-redux": "^4.4.47",
     "@types/react-router-dom": "^4.0.7",
     "@types/react-tap-event-plugin": "0.0.30",
@@ -33,17 +33,21 @@
     "@types/electron-devtools-installer": "^2.0.2",
     "@types/enzyme": "^2.8.5",
     "@types/jest": "^20.0.6",
+    "@types/material-ui": "^0.17.23",
+    "@types/webpack-env": "^1.13.1",
     "awesome-typescript-loader": "^3.2.2",
     "devtron": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
     "enzyme": "^2.9.1",
     "jest": "^20.0.4",
+    "react-hot-loader": "^3.0.0-beta.7",
     "source-map-loader": "^0.2.1",
     "ts-jest": "^20.0.7",
     "tslint": "^5.5.0",
     "tslint-react": "^3.2.0",
     "typescript": "^2.4.2",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.9.1"
   },
   "scripts": {
     "test": "jest",
@@ -53,6 +57,7 @@
     "watch-main": "webpack --watch --config webpack.main.config.js",
     "watch-renderer": "webpack --watch --config webpack.renderer.config.js",
     "watch": "webpack --watch",
+    "serve": "webpack-dev-server --config webpack.renderer.config.js --inline",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts'"
   },
   "keywords": [],
