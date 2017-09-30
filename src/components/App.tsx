@@ -9,7 +9,6 @@ import {
     Link,
     Route,
 } from 'react-router-dom';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 import {Action, ActionFunction0, ActionFunctionAny} from 'redux-actions';
 import {appActionCreator} from '../actionCreators';

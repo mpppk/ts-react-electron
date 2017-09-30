@@ -34,7 +34,6 @@ function createWindow() {
           slashes: true,
       }));
   } else {
-    console.log('not prod');
       mainWindow.loadURL('http://localhost:8080');
   }
 
