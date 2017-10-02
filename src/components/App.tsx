@@ -9,7 +9,6 @@ import {
     Link,
     Route,
 } from 'react-router-dom';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 import {Action, ActionFunction0, ActionFunctionAny} from 'redux-actions';
 import {appActionCreator} from '../actionCreators';
@@ -23,10 +22,6 @@ fs.readdir('.', (err, files) => {
         throw err;
     }
 });
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 export interface IAppProps {
     isOpenDrawer?: boolean;
