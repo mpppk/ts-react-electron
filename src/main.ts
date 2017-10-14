@@ -3,29 +3,46 @@ import * as electron from 'electron';
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import * as path from 'path';
 import * as url from 'url';
-import winston from 'winston';
+import * as winston from 'winston';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: Electron.BrowserWindow;
+let mainWindow: Electron.BrowserWindow | null;
 
 function createWindow() {
   installExtension(REACT_DEVELOPER_TOOLS)
       .then((name: string) => winston.debug(`Added Extension:  ${name}`))
-      .catch((err: Error) => winston.error('An error occurred: ', err));
+      .catch((err: Error) => winston.warn('An error occurred: ', err));
 
-  // Create the browser window.
+  installExtension(REDUX_DEVTOOLS)
+      .then((name: string) => winston.debug(`Added Extension:  ${name}`))
+      .catch((err: Error) => winston.warn('An error occurred: ', err));
+
+  require('electron-debug')(); // eslint-disable-line no-var-requires
+
+    // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '..', 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
+  if (process.env.NODE_ENV === 'production') {
+      mainWindow.loadURL(url.format({
+          pathname: path.join(__dirname, '..', 'index.html'),
+          protocol: 'file:',
+          slashes: true,
+      }));
+  } else {
+      mainWindow.loadURL('http://localhost:8080');
+  }
+
+  // and load the index.html of the app.
+  // mainWindow.loadURL(url.format({
+  //   pathname: path.join(__dirname, '..', 'index.html'),
+  //   protocol: 'file:',
+  //   slashes: true,
+  // }));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
