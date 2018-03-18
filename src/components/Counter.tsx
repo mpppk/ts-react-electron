@@ -26,7 +26,7 @@ export class Counter extends React.Component<ICounterProps, undefined> {
         return (
             <div>
                 <h1>Count: {this.props.count}</h1>
-                <RaisedButton label='Async Increment' onClick={this.asyncIncrementClickEvent} />
+                <RaisedButton label='Async Increment!!!' onClick={this.asyncIncrementClickEvent} />
                 <RaisedButton label='Increment' onClick={this.incrementClickEvent} />
                 <RaisedButton label='Decrement' onClick={this.decrementClickEvent} />
             </div>
